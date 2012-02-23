@@ -6,9 +6,13 @@ This benchmark only tests glMatrix to compare the results with the GLM (C++) run
 To run the benchmark, start the glMatrixBenchmark.html in a webbrowser to get the performance metrics for glMatrix / JavaScript
 To run the GLM matrix run make
 
+The math libraries this benchmark uses are:
+
 GLM http://glm.g-truc.net/
 OpenGL Mathematics (GLM) is a header only C++ mathematics library for graphics software based on the OpenGL Shading Language (GLSL) specification.
 
-
 glMatrix https://github.com/toji/gl-matrix
 Javascript Matrix and Vector library for High Performance WebGL apps
+
+Besides it uses a high resolution timer class from:
+http://www.songho.ca/misc/timer/timer.html
