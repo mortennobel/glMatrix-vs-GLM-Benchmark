@@ -2,9 +2,6 @@
 //  main.cpp
 //  3DMathBenchmark
 //
-//  Created by Morten Nobel-Joergensen on 2/22/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
 
 #include <iostream>
 #include <cstdlib>
@@ -26,8 +23,8 @@ typedef float floatType;
 
 using namespace glm;
 
-const int runCount = 10;
-const long internalRunCount = 2000000;
+int runCount = 10;
+long internalRunCount = 2000000;
 Timer t;
 
 float rnd(float max){
@@ -152,8 +149,6 @@ double testVectorTransformation(long count){
 }
 
 
-
-
 void runTestCase(double(*f)(long), char* name){
     double totalTime = 0;
     double minTime = 0;
@@ -179,6 +174,15 @@ void runTestCase(double(*f)(long), char* name){
 
 int main (int argc, const char * argv[])
 {
+	if (argc>=2){
+		internalRunCount = atoi(argv[1]);
+		std::cout<<"InternalRunCount: "<<internalRunCount<<std::endl;
+	}
+	if (argc>=3){
+		runCount = atoi(argv[2]);
+		std::cout<<"Run count: "<<runCount<<std::endl;
+	}
+
     /* initialize random seed: */
     srand ( time(NULL) );
         

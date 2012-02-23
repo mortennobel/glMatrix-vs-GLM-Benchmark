@@ -6,8 +6,8 @@ WARN = -Wall
 CFLAGS = $(OPT) $(WARN) # the C compiler flags
 
 run: project
-	./glmBenchmarkSingle
-	./glmBenchmarkDouble
+	./glmBenchmarkSingle 2000000 10
+	./glmBenchmarkDouble 2000000 10
 
 
 project: $(OBJECTS)
