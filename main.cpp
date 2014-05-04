@@ -11,13 +11,22 @@
 
 #define GLM_FORCE_INLINE
 
+#include "glm/glm.hpp"
+#include "glm/gtx/transform.hpp"
+
 #ifdef GLM_PRECISION_HIGHP_FLOAT
 typedef double floatType;
+typedef glm::dmat3 m3;
+typedef glm::dmat4 m4;
+typedef glm::dvec3 v3;
+typedef glm::dvec4 v4;
 #else
 typedef float floatType;
+typedef glm::mat3 m3;
+typedef glm::mat4 m4;
+typedef glm::vec3 v3;
+typedef glm::vec4 v4;
 #endif
-#include "glm.hpp"
-#include "gtx/transform.hpp"
 #include "Timer.h"
 
 
@@ -33,8 +42,8 @@ float rnd(float max){
 
 
 
-glm::mat4 createRandomMatrix(){
-    return glm::mat4(
+m4 createRandomMatrix(){
+    return m4(
                      rnd(100),rnd(100),rnd(100),rnd(100),
                      rnd(100),rnd(100),rnd(100),rnd(100),
                      rnd(100),rnd(100),rnd(100),rnd(100),
@@ -43,8 +52,8 @@ glm::mat4 createRandomMatrix(){
 }
 
 double testMultiplication(long count){
-    glm::mat4 m1 = createRandomMatrix();
-    glm::mat4 m2 = createRandomMatrix();    
+    m4 m1 = createRandomMatrix();
+    m4 m2 = createRandomMatrix();    
     t.start();
     for (int i = 0; i < count; i++) {
         m1 = m1 * m2;
@@ -54,8 +63,8 @@ double testMultiplication(long count){
 }
 
 double testTranslation(long count){
-    glm::mat4 m1 = createRandomMatrix();
-    glm::vec3 v1 = glm::vec3(1, 2, 3);
+    m4 m1 = createRandomMatrix();
+    v3 v1 = v3(1, 2, 3);
 
     t.start();
     for (int i = 0; i < count; i++) {
@@ -66,8 +75,8 @@ double testTranslation(long count){
 }
 
 double testScale(long count){
-    glm::mat4 m1 = createRandomMatrix();
-    glm::vec3 v1 = glm::vec3(1, 2, 3);
+    m4 m1 = createRandomMatrix();
+    v3 v1 = v3(1, 2, 3);
     
     t.start();
     for (int i = 0; i < count; i++) {
@@ -78,8 +87,8 @@ double testScale(long count){
 }
 
 double testRotationArbitraryAxis(long count){
-    glm::mat4 m1 = createRandomMatrix();
-    glm::vec3 v1 = glm::vec3(1, 2, 3);
+    m4 m1 = createRandomMatrix();
+    v3 v1 = v3(1, 2, 3);
     floatType a = (floatType)M_PI /2;
     t.start();
     for (int i = 0; i < count; i++) {
@@ -90,7 +99,7 @@ double testRotationArbitraryAxis(long count){
 }
 
 double testTranspose(long count){
-    glm::mat4 m1 = createRandomMatrix();
+    m4 m1 = createRandomMatrix();
 
     t.start();
     for (int i = 0; i < count; i++) {
@@ -105,7 +114,7 @@ double testTranspose(long count){
 }
 
 double testInverse(long count){
-    glm::mat4 m1 = createRandomMatrix();
+    m4 m1 = createRandomMatrix();
     
     t.start();
     for (int i = 0; i < count; i++) {
@@ -120,9 +129,9 @@ double testInverse(long count){
 }
 
 double testInverseMat3(long count){
-    glm::mat4 m1 = createRandomMatrix();
-    glm::mat3 m2;
-    m2 = glm::mat3(m1); // note that this benchmark is actually doing less than 
+    m4 m1 = createRandomMatrix();
+    m3 m2;
+    m2 = m3(m1); // note that this benchmark is actually doing less than 
     t.start();
     for (int i = 0; i < count; i++) {
         m2 = glm::inverse(m2);
@@ -135,8 +144,8 @@ double testInverseMat3(long count){
 }
 
 double testVectorTransformation(long count){
-    glm::mat4 m1 = createRandomMatrix();
-    glm::vec4 v1 = glm::vec4(1,2,3,1);
+    m4 m1 = createRandomMatrix();
+    v4 v1 = v4(1,2,3,1);
     t.start();
     for (int i = 0; i < count; i++) {
         v1 = m1*v1;

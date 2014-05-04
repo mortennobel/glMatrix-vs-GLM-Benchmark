@@ -1,0 +1,23 @@
+CC = emcc
+CXX = emcc #g++
+OPT = -O3
+CXXFLAGS = -O3
+WARN = -Wall
+
+CFLAGS = $(OPT) $(WARN) # the C compiler flags
+
+run: project
+	./glmBenchmarkSingle 2000000 10
+	./glmBenchmarkDouble 2000000 10
+
+
+project: $(OBJECTS)
+	rm -rf emscripten
+	mkdir emscripten
+	$(CXX) $(CFLAGS) -o emscripten/glmBenchmarkSingle.html Timer.cpp main.cpp
+	$(CXX) $(CFLAGS) -D GLM_PRECISION_HIGHP_FLOAT -o emscripten/glmBenchmarkDouble.html Timer.cpp main.cpp	
+
+clean:
+	@rm -f *.o
+
+
